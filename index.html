@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        *{
+            padding: 0%;
+            margin: 0%;
+        }
+
+        body{
+            background-color: #94A890;
+            width: 100%;
+        }
+        header{
+            background-color: #24585B;
+            color: white;
+            font-family: serif;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        main{
+            width: 100%;
+            height: 480px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: center;
+        }
+
+        #tela{
+            width: 350px;
+            height: 400px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: space-around;
+            background-color: #258685;
+            border-radius: 15px;
+            box-shadow: 3px 3px 3px black;
+        }
+
+        #res{
+            width: 300px;
+            height: 300px;
+            background-color: white;
+            font-size: 250px;
+            font-weight: bold;
+            color: black;
+            border-radius: 15px;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+            align-items: center;
+        }
+
+        #aray{
+            background-color: #258685;
+            width: 800px;
+            height: 400px;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 15px;
+            box-shadow: 3px 3px 3px black;
+        }
+
+        .arays{
+            color: white;
+            font-size: 40px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: auto auto auto 10px;
+            padding: 4px;
+            border: solid 2px black;
+            border-radius: 15px;
+        }
+        
+        button{
+            background-color: #1F1F29;
+            color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        footer{
+            background-color: #24585B;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chamar um Bingo</h1>
+    </header>
+    <main>
+            <div id="tela">
+                <div id="res">
+                    <p id="number"></p>
+                </div>
+                <button onclick="chamarPedra()">Chamar Pedra</button> 
+                <p>&nbsp;</p>
+                <button onclick="chamarAray()">Mostrar Pedras</button>
+            </div>
+            <div id="aray">
+                <p id="ar1" class="arays"></p>
+                <p id="ar2" class="arays"></p>
+                <p id="ar3" class="arays"></p>
+                <p id="ar4" class="arays"></p>
+                <p id="ar5" class="arays"></p>
+            </div>
+    </main>
+    <footer>
+        <p>Desenvolvido por Otavio Ferreira</p>
+    </footer>
+    <script>
+        var div = document.getElementById("number")
+        var p1 = document.getElementById("ar1")
+        var p2 = document.getElementById("ar2")
+        var p3 = document.getElementById("ar3")
+        var p4 = document.getElementById("ar4")
+        var p5 = document.getElementById("ar5")
+        var arr1 = []
+        var arr2 = []
+        var arr3 = []
+        var arr4 = []
+        var arr5 = []
+
+        function chamarPedra(){
+            
+            var num = parseInt(Math.random() * (75 - 1) + 1)
+
+            if(arr1.includes(num) || arr2.includes(num) || arr3.includes(num) || arr4.includes(num) || arr5.includes(num)){
+                return null
+            }
+            else{
+                if(num >= 1 && num <= 15){
+                    arr1.push(num)
+                }
+                if(num >= 16 && num <= 30){
+                    arr2.push(num)
+                }
+                if(num >= 31 && num <= 45){
+                    arr3.push(num)
+                }
+                if(num >= 46 && num <= 60){
+                    arr4.push(num)
+                }
+                if(num >= 61 && num <= 75){
+                    arr5.push(num)
+                }
+                
+                div.innerHTML = num
+            }
+            
+            localStorage.setItem(('pedras1').toString(), arr1.sort(function(a,b){
+                if(a > b) return 1;
+                if(a < b) return -1;
+                return 0;
+            }))
+
+            localStorage.setItem(('pedras2').toString(), arr2.sort(function(a,b){
+                if(a > b) return 1;
+                if(a < b) return -1;
+                return 0;
+            }))
+
+            localStorage.setItem(('pedras3').toString(), arr3.sort(function(a,b){
+                if(a > b) return 1;
+                if(a < b) return -1;
+                return 0;
+            }))
+            
+            localStorage.setItem(('pedras4').toString(), arr4.sort(function(a,b){
+                if(a > b) return 1;
+                if(a < b) return -1;
+                return 0;
+            }))
+
+            localStorage.setItem(('pedras5').toString(), arr5.sort(function(a,b){
+                if(a > b) return 1;
+                if(a < b) return -1;
+                return 0;
+            }))
+        }
+
+        function chamarAray(){
+
+            var myArray1 = localStorage.getItem('pedras1')
+            var myArray2 = localStorage.getItem('pedras2')
+            var myArray3 = localStorage.getItem('pedras3')
+            var myArray4 = localStorage.getItem('pedras4')
+            var myArray5 = localStorage.getItem('pedras5')
+
+            p1.innerHTML = myArray1
+            p2.innerHTML = myArray2
+            p3.innerHTML = myArray3
+            p4.innerHTML = myArray4
+            p5.innerHTML = myArray5
+            
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
